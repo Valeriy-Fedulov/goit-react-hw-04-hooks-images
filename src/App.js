@@ -10,12 +10,15 @@ import { Modal } from "./components/modal";
 class App extends React.Component {
   state = {};
 
-  // onSubmit {}
+  onSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+  };
 
   render() {
     return (
       <>
-        <Searchbar />
+        <Searchbar onSubmit={this.onSubmit} />
         <ImageGallery>
           <Loader />
           <ImageGalleryItem />
