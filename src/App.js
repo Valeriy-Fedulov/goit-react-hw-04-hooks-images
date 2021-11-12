@@ -14,15 +14,15 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <Searchbar onSubmit={this.onSubmit} />
+      <>
+        <Searchbar />
         <ImageGallery>
           <Loader />
           <ImageGalleryItem />
         </ImageGallery>
         <Button />
         <Modal />
-      </div>
+      </>
     );
   }
 }
