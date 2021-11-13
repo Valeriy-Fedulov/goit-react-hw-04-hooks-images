@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Loader from "react-loader-spinner";
 
 class ImageGalleryItem extends React.Component {
   state = {
@@ -12,22 +13,37 @@ class ImageGalleryItem extends React.Component {
       per_page: 12,
     },
     arcticles: [],
+    loading: false,
   };
 
   componentDidMount() {
+    this.setState({ loading: true });
     const { q, page, key, image_type, orientation, per_page } =
       this.state.options;
-    axios
-      .get(
-        `https://pixabay.com/api/?q=${q}&page=${page}&key=${key}&image_type=${image_type}&orientation=${orientation}&per_page=${per_page}`
-      )
-      .then((response) => {
-        this.setState({ arcticles: response.data.hits });
-      });
+
+    setTimeout(() => {
+      axios
+        .get(
+          `https://pixabay.com/api/?q=${q}&page=${page}&key=${key}&image_type=${image_type}&orientation=${orientation}&per_page=${per_page}`
+        )
+        .then((response) => {
+          this.setState({ arcticles: response.data.hits });
+        })
+        .finally(() => this.setState({ loading: false }));
+    }, 1000);
   }
   render() {
     return (
       <>
+        {this.state.loading && (
+          <Loader
+            type="Puff"
+            color="#00BFFF"
+            height={100}
+            width={100}
+            timeout={3000} //3 secs
+          />
+        )}
         {this.state.arcticles.map(({ id, webformatURL, largeImageURL }) => (
           <li key={id} className="gallery-item">
             <img src={webformatURL} alt="" />

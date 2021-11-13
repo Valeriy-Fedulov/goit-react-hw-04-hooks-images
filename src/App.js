@@ -8,11 +8,12 @@ import { Loader } from "./components/loader";
 import { Modal } from "./components/modal";
 
 class App extends React.Component {
-  state = {};
+  state = {
+    image: "",
+  };
 
-  onSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target);
+  onSubmit = (image) => {
+    this.setState({ image });
   };
 
   render() {
