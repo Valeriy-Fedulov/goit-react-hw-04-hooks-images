@@ -31,27 +31,25 @@ class ImageGallery extends React.Component {
   fetchApi(query = "") {
     this.setState({ loading: true });
 
-    setTimeout(() => {
-      axios
-        .get(
-          `https://pixabay.com/api/?q=${query}&page=${this.props.page}&key=8645843-73f0b565a99dd2126325d1c4b&image_type=photo&orientation=horizontal&per_page=12`
-        )
-        .then((response) => {
-          if (this.props.page === 1) {
-            this.setState({
-              arcticles: response.data.hits,
-              loading: false,
-            });
-          } else {
-            this.setState((prevState) => ({
-              arcticles: prevState.arcticles.concat(response.data.hits),
-              loading: false,
-            }));
-            this.scrollDown();
-          }
-        })
-        .catch((error) => this.setState({ error }));
-    }, 1000);
+    axios
+      .get(
+        `https://pixabay.com/api/?q=${query}&page=${this.props.page}&key=8645843-73f0b565a99dd2126325d1c4b&image_type=photo&orientation=horizontal&per_page=12`
+      )
+      .then((response) => {
+        if (this.props.page === 1) {
+          this.setState({
+            arcticles: response.data.hits,
+            loading: false,
+          });
+        } else {
+          this.setState((prevState) => ({
+            arcticles: prevState.arcticles.concat(response.data.hits),
+            loading: false,
+          }));
+          this.scrollDown();
+        }
+      })
+      .catch((error) => this.setState({ error }));
   }
 
   toggleModal = (e) => {
