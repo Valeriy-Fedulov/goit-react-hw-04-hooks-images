@@ -4,10 +4,10 @@ const ImageGalleryItem = ({ arcticles, toggleModal }) => {
   return (
     <>
       {arcticles.map(({ id, webformatURL, largeImageURL }) => (
-        <li key={id} className="imageGalleryItem">
+        <li key={id} className="ImageGalleryItem">
           <img
-            className="webformatURL"
-            src={largeImageURL}
+            className="ImageGalleryItem-image"
+            src={webformatURL}
             alt=""
             data-largeimage={largeImageURL}
             onClick={toggleModal}

@@ -26,8 +26,6 @@ class ImageGallery extends React.Component {
     ) {
       this.fetchApi(this.props.image);
     }
-
-    console.log(this.props.page);
   }
 
   fetchApi(query = "") {
@@ -49,6 +47,7 @@ class ImageGallery extends React.Component {
               arcticles: prevState.arcticles.concat(response.data.hits),
               loading: false,
             }));
+            this.scrollDown();
           }
         })
         .catch((error) => this.setState({ error }));
@@ -61,23 +60,37 @@ class ImageGallery extends React.Component {
     this.setState((prevState) => ({ showModal: !prevState.showModal }));
   };
 
+  scrollDown() {
+    window.scrollTo({
+      top: window.innerHeight + window.scrollY,
+      behavior: "smooth",
+    });
+  }
+
   render() {
     return (
       <>
         {this.state.loading && <Loading />}
-        <ul className="imageGallery"></ul>
         {this.state.arcticles.length > 0 ? (
-          <ImageGalleryItem
-            arcticles={this.state.arcticles}
-            toggleModal={this.toggleModal}
-          />
+          <>
+            <ul className="ImageGallery">
+              <ImageGalleryItem
+                arcticles={this.state.arcticles}
+                toggleModal={this.toggleModal}
+              />
+            </ul>
+            <Button
+              onClickLMore={this.props.onClickLMore}
+              scrollDown={this.scrollDown}
+            />
+          </>
         ) : (
-          <div>
-            <h2>Not found. </h2>
-          </div>
+          !this.state.loading && (
+            <div className="NothingFound">
+              <h2>Nothing found</h2>
+            </div>
+          )
         )}
-        {console.log(this.props)}
-        <Button onClickLMore={this.props.onClickLMore} />
         {this.state.showModal && (
           <Modal
             onClose={this.toggleModal}

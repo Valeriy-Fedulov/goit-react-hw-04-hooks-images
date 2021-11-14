@@ -1,7 +1,7 @@
 import React from "react";
 
 const Button = ({ onClickLMore }) => (
-  <button className="Button" type="button" onClick={onClickLMore}>
+  <button id="loadmore" className="Button" type="button" onClick={onClickLMore}>
     Load more
   </button>
 );

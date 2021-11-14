@@ -19,12 +19,11 @@ class App extends React.Component {
 
   onClickLMore = () => {
     this.setState((prevState) => ({ page: this.state.page + 1 }));
-    console.log(this.state.page);
   };
 
   render() {
     return (
-      <div className="app">
+      <div className="App">
         <Searchbar onSubmit={this.onSubmit} />
         <ImageGallery
           image={this.state.image}
