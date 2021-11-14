@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 
 class Searchbar extends React.Component {
   state = {
@@ -7,24 +8,28 @@ class Searchbar extends React.Component {
 
   handleChange = (e) => {
     this.setState({ image: e.currentTarget.value });
-    console.log(this.state.image);
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onSubmit(this.state.image);
+
+    if (this.state.image.trim() === "") {
+      toast.error("Введите название");
+      return;
+    }
+    this.props.onSubmit(this.state.image, 1);
     this.setState({ image: "" });
   };
 
   render() {
     return (
       <header className="searchbar">
-        <form className="form" onSubmit={this.handleSubmit}>
-          <button type="submit" className="button">
-            <span className="button-label">Search</span>
+        <form className="searchForm" onSubmit={this.handleSubmit}>
+          <button type="submit" className="searchForm-button">
+            <span className="searchForm-button-label">Search</span>
           </button>
           <input
-            className="input"
+            className="searchForm-input"
             type="text"
             autoComplete="off"
             autoFocus

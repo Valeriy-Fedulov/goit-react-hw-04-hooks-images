@@ -1,5 +1,9 @@
 import React from "react";
 
-const Button = () => <button>Load more</button>;
+const Button = ({ onClickLMore }) => (
+  <button className="Button" type="button" onClick={onClickLMore}>
+    Load more
+  </button>
+);
 
 export { Button };

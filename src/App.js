@@ -1,32 +1,38 @@
 import React from "react";
 import "./App.css";
+
 import { Searchbar } from "./components/searchbar";
 import { ImageGallery } from "./components/imagegallery";
-import { ImageGalleryItem } from "./components/imagegalleryitem";
-import { Button } from "./components/button/Button";
-import { Loader } from "./components/loader";
-import { Modal } from "./components/modal";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class App extends React.Component {
   state = {
     image: "",
+    page: 1,
   };
 
-  onSubmit = (image) => {
-    this.setState({ image });
+  onSubmit = (image, page) => {
+    this.setState({ image, page });
+  };
+
+  onClickLMore = () => {
+    this.setState((prevState) => ({ page: this.state.page + 1 }));
+    console.log(this.state.page);
   };
 
   render() {
     return (
-      <>
+      <div className="app">
         <Searchbar onSubmit={this.onSubmit} />
-        <ImageGallery>
-          <Loader />
-          <ImageGalleryItem />
-        </ImageGallery>
-        <Button />
-        <Modal />
-      </>
+        <ImageGallery
+          image={this.state.image}
+          page={this.state.page}
+          onClickLMore={this.onClickLMore}
+        />
+        <ToastContainer autoClose={3000} />
+      </div>
     );
   }
 }
