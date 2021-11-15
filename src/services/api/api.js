@@ -11,7 +11,7 @@ function fetchImage(query, page) {
     safesearch: true,
     per_page: 12,
   };
-  return axios.get();
+  return axios("");
 }
 
 const api = { fetchImage };
