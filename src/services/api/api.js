@@ -8,10 +8,9 @@ function fetchImage(query, page) {
     key: "8645843-73f0b565a99dd2126325d1c4b",
     image_type: "photo",
     orientation: "horizontal",
-    safesearch: true,
     per_page: 12,
   };
-  return axios("");
+  return axios();
 }
 
 const api = { fetchImage };
