@@ -11,20 +11,24 @@ class Searchbar extends React.Component {
   };
 
   handleSubmit = (e) => {
+    const { image } = this.state;
+
     e.preventDefault();
 
-    if (this.state.image.trim() === "") {
+    if (image.trim() === "") {
       toast.error("Введите название");
       return;
     }
-    this.props.onSubmit(this.state.image, 1);
+    this.props.onSubmit(image, 1);
     this.setState({ image: "" });
   };
 
   render() {
+    const { handleSubmit, handleChange } = this;
+
     return (
       <header className="Searchbar">
-        <form className="SearchForm" onSubmit={this.handleSubmit}>
+        <form className="SearchForm" onSubmit={handleSubmit}>
           <button type="submit" className="SearchForm-button">
             <span className="SearchForm-button-label">Search</span>
           </button>
@@ -35,7 +39,7 @@ class Searchbar extends React.Component {
             autoFocus
             placeholder="Search images and photos"
             value={this.state.image}
-            onChange={this.handleChange}
+            onChange={handleChange}
           />
         </form>
       </header>

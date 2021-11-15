@@ -18,18 +18,17 @@ class App extends React.Component {
   };
 
   onClickLMore = () => {
-    this.setState((prevState) => ({ page: this.state.page + 1 }));
+    this.setState({ page: this.state.page + 1 });
   };
 
   render() {
+    const { image, page } = this.state;
+    const { onSubmit, onClickLMore } = this;
+
     return (
       <div className="App">
-        <Searchbar onSubmit={this.onSubmit} />
-        <ImageGallery
-          image={this.state.image}
-          page={this.state.page}
-          onClickLMore={this.onClickLMore}
-        />
+        <Searchbar onSubmit={onSubmit} />
+        <ImageGallery image={image} page={page} onClickLMore={onClickLMore} />
         <ToastContainer autoClose={3000} />
       </div>
     );
