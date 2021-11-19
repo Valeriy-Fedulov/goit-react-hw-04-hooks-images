@@ -1,50 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-class Searchbar extends React.Component {
-  state = {
-    image: "",
-  };
+function Searchbar({ onSubmit }) {
+  const [image, setImage] = useState("");
 
-  handleChange = (e) => {
-    this.setState({ image: e.currentTarget.value });
-  };
-
-  handleSubmit = (e) => {
-    const { image } = this.state;
-
+  function handleSubmit(e) {
     e.preventDefault();
 
     if (image.trim() === "") {
       toast.error("Введите название");
       return;
     }
-    this.props.onSubmit(image, 1);
-    this.setState({ image: "" });
-  };
-
-  render() {
-    const { handleSubmit, handleChange } = this;
-
-    return (
-      <header className="Searchbar">
-        <form className="SearchForm" onSubmit={handleSubmit}>
-          <button type="submit" className="SearchForm-button">
-            <span className="SearchForm-button-label">Search</span>
-          </button>
-          <input
-            className="SearchForm-input"
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-            value={this.state.image}
-            onChange={handleChange}
-          />
-        </form>
-      </header>
-    );
+    onSubmit(image, 1);
+    setImage("");
   }
+
+  return (
+    <header className="Searchbar">
+      <form className="SearchForm" onSubmit={handleSubmit}>
+        <button type="submit" className="SearchForm-button">
+          <span className="SearchForm-button-label">Search</span>
+        </button>
+        <input
+          className="SearchForm-input"
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+          value={image}
+          onChange={(e) => setImage(e.currentTarget.value)}
+        />
+      </form>
+    </header>
+  );
 }
 
 export { Searchbar };
