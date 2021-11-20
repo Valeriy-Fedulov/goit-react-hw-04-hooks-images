@@ -11,7 +11,7 @@ function Searchbar({ onSubmit }) {
       toast.error("Введите название");
       return;
     }
-    onSubmit(image, 1);
+    onSubmit(image);
     setImage("");
   }
 

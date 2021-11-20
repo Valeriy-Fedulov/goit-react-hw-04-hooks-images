@@ -11,13 +11,13 @@ function App() {
   const [image, setImage] = useState("");
   const [page, setPage] = useState(1);
 
-  function onSubmit(searchImage, defaultPage) {
+  function onSubmit(searchImage) {
     setImage(searchImage);
     setPage(1);
   }
 
   function onClickLMore() {
-    setPage(page + 1);
+    setPage((prevPage) => prevPage + 1);
   }
 
   return (

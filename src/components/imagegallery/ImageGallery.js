@@ -28,7 +28,9 @@ function ImageGallery(props) {
           setArcticles(response.data.hits);
           setLoading(false);
         } else {
-          setArcticles(arcticles.concat(response.data.hits));
+          setArcticles((prevArcticles) =>
+            prevArcticles.concat(response.data.hits)
+          );
           setLoading(false);
           scrollDown();
         }
