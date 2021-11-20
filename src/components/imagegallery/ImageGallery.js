@@ -14,9 +14,7 @@ function ImageGallery(props) {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => fetchApi(), []);
-
-  useEffect(() => fetchApi(image), [image, page]);
+  useEffect(() => fetchApi(image, page), [image, page]);
 
   function fetchApi(query = "") {
     setLoading(true);
